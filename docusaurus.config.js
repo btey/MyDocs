@@ -14,7 +14,7 @@ module.exports = {
       {
         id: 'community',
         path: 'community',
-        editUrl: 'https://github.com/facebook/docusaurus/edit/master/website/',
+        editUrl: 'https://github.com/btey/MyDocs/edit/master/community/',
         routeBasePath: 'community',
         sidebarPath: require.resolve('./sidebarsCommunity.js'),
       },
@@ -26,11 +26,11 @@ module.exports = {
         path: 'second-blog/blog',
         routeBasePath: 'second-blog',
         editUrl:
-          'https://github.com/facebook/docusaurus/edit/master/website/dogfooding',
+          'https://github.com/btey/MyDocs/edit/master/second-blog/blog',
         postsPerPage: 3,
         feedOptions: {
           type: 'all',
-          copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc.`,
+          copyright: `Copyright © ${new Date().getFullYear()} B. Tey`,
         },
       },
     ],
@@ -88,11 +88,11 @@ module.exports = {
         },
         {to: 'blog', label: 'Blog', position: 'left'},
         {to: 'second-blog', label: 'Blog 2', position: 'left'},
-        //{
-        //  href: 'https://github.com/facebook/docusaurus',
-        //  label: 'GitHub',
-        //  position: 'right',
-        //},
+        {
+          href: 'https://github.com/btey',
+          label: 'GitHub',
+          position: 'right',
+        },
       ],
     },
     footer: {
@@ -137,12 +137,12 @@ module.exports = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/btey',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} B. Tey. Built with Docusaurus.`,
     },
   },
   presets: [
@@ -154,7 +154,7 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
+            'https://github.com/btey/MyDocs/edit/master/',
         },
         blog: {
           path: 'blog',
@@ -162,10 +162,10 @@ module.exports = {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/blog/',
+            'https://github.com/btey/MyDocs/edit/master/blog/',
           feedOptions: {
             type: 'all',
-            copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc.`,
+            copyright: `Copyright © ${new Date().getFullYear()} B. Tey`,
           },
           blogSidebarCount: 'ALL',
           blogSidebarTitle: 'All our posts',
