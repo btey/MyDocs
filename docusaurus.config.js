@@ -14,7 +14,7 @@ module.exports = {
       {
         id: 'community',
         path: 'community',
-        editUrl: 'https://github.com/btey/MyDocs/edit/master/community/',
+        editUrl: 'https://github.com/btey/MyDocs/edit/master/',
         routeBasePath: 'community',
         sidebarPath: require.resolve('./sidebarsCommunity.js'),
       },
@@ -26,7 +26,7 @@ module.exports = {
         path: 'second-blog/blog',
         routeBasePath: 'second-blog',
         editUrl:
-          'https://github.com/btey/MyDocs/edit/master/second-blog/blog',
+          'https://github.com/btey/MyDocs/edit/master/second-blog/',
         postsPerPage: 3,
         feedOptions: {
           type: 'all',
@@ -162,7 +162,7 @@ module.exports = {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/btey/MyDocs/edit/master/blog/',
+            'https://github.com/btey/MyDocs/edit/master/',
           feedOptions: {
             type: 'all',
             copyright: `Copyright © ${new Date().getFullYear()} B. Tey`,
