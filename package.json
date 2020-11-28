@@ -1,0 +1,47 @@
+{
+  "name": "whq-cd-dev",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "docusaurus": "docusaurus",
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "serve": "docusaurus serve"
+  },
+  "dependencies": {
+    "@docusaurus/core": "2.0.0-alpha.66",
+    "@docusaurus/plugin-client-redirects": "2.0.0-alpha.66",
+    "@docusaurus/plugin-content-docs": "^2.0.0-alpha.66",
+    "@docusaurus/plugin-ideal-image": "2.0.0-alpha.66",
+    "@docusaurus/plugin-pwa": "2.0.0-alpha.66",
+    "@docusaurus/preset-classic": "2.0.0-alpha.66",
+    "@docusaurus/remark-plugin-npm2yarn": "2.0.0-alpha.66",
+    "@docusaurus/theme-live-codeblock": "2.0.0-alpha.66",
+    "@easyops-cn/docusaurus-search-local": "^0.13.1",
+    "clsx": "^1.1.1",
+    "color": "^3.1.2",
+    "npm-to-yarn": "^1.0.0-2",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "workbox-routing": "^5.0.0",
+    "workbox-strategies": "^5.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "raw-loader": "^4.0.1"
+  }
+}
