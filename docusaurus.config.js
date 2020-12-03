@@ -1,6 +1,6 @@
 module.exports = {
-  title: 'My Site',
-  tagline: 'The tagline of my site',
+  title: 'Tech Docs',
+  tagline: 'My Technical Documentation',
   url: 'https://btey.github.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -66,11 +66,11 @@ module.exports = {
     },
     navbar: {
       hideOnScroll: false,
-      title: 'My Site',
+      title: 'My Tech Docs',
       logo: {
         alt: 'My Site Logo',
-        src: 'img/logo.svg',
-        srcDark: 'img/docusaurus_keytar.svg',
+        src: 'img/logo6b.png',
+        srcDark: 'img/logo6b.png',
       },
       items: [
         {
