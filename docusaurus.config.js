@@ -90,8 +90,9 @@ module.exports = {
         {to: 'second-blog', label: 'Blog 2', position: 'left'},
         {
           href: 'https://github.com/btey',
-          label: 'GitHub',
+          className: 'header-github-link',
           position: 'right',
+          'aria-label': 'GitHub repository',
         },
       ],
     },
