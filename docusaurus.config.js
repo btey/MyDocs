@@ -12,14 +12,14 @@ module.exports = {
     [
       '@docusaurus/plugin-content-docs',
       {
-        id: 'community',
-        path: 'community',
+        id: 'project-management',
+        path: 'project-management',
         editUrl: 'https://github.com/btey/MyDocs/edit/master/',
-        routeBasePath: 'community',
-        sidebarPath: require.resolve('./sidebarsCommunity.js'),
+        routeBasePath: 'project-management',
+        sidebarPath: require.resolve('./sidebarsPM.js'),
       },
     ],
-    [
+/*    [
       '@docusaurus/plugin-content-blog',
       {
         id: 'second-blog',
@@ -33,26 +33,26 @@ module.exports = {
           copyright: `Copyright © ${new Date().getFullYear()} B. Tey`,
         },
       },
-    ],
+    ],*/
     [
       '@easyops-cn/docusaurus-search-local',
       {
         hashed: true,
         docsDir: [
           "docs", 
-          "community"
+          "project-management"
         ],
         docsRouteBasePath: [
           "/docs",
-          "/community"
+          "/project-management"
         ],
         blogDir: [
           "blog",
-          "second-blog/blog"
+          //"second-blog/blog"
         ],
         blogRouteBasePath: [
           "/blog",
-          "/second-blog"
+          //"/second-blog"
         ],
       },
     ],
@@ -74,20 +74,20 @@ module.exports = {
       },
       items: [
         {
-          to: 'docs/',
+          to: 'docs/OBIEE-GitDevEnv',
           //activeBasePath: 'docs',
-          label: 'Docs',
+          label: 'Oracle',
           position: 'left',
-          docId: 'introduction',
+          docId: 'OBIEE-GitDevEnv',
         },
         {
-          to: '/community/support',
-          label: 'Community',
+          to: '/project-management/openproject-install',
+          label: 'Project Management',
           position: 'left',
-          activeBaseRegex: `/community/`,
+          activeBaseRegex: `/project-management/`,
         },
-        {to: 'blog', label: 'Blog', position: 'left'},
-        {to: 'second-blog', label: 'Blog 2', position: 'left'},
+        //{to: 'blog', label: 'Blog', position: 'left'},
+        //{to: 'second-blog', label: 'Blog 2', position: 'left'},
         {
           href: 'https://github.com/btey',
           className: 'header-github-link',

@@ -1,6 +1,8 @@
 module.exports = {
   someSidebar: {
-    Docusaurus: ['doc1', 'doc2', 'doc3'],
-    Features: ['mdx'],
+    "Oracle Business Intelligence": ['OBIEE-GitDevEnv'],
+    //Docusaurus: ['doc1', 'doc2', 'doc3', 
+    //  {Features: ['mdx']},
+    //],
   },
 };

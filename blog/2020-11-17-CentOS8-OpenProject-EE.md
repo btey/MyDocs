@@ -1,4 +1,11 @@
-# OpenProject (Docker) + CentOS 8
+---
+slug: CentOS8-OP
+title: OpenProject (Docker) + CentOS 8
+author: Ben Tey
+author_url: https://github.com/btey
+author_image_url: ../static/img/avatar/avataaars.png
+tags: [CentOS, OpenProject, Docker]
+---
 
 Note: start with a CentOS 8 server installation without any extras.
 
