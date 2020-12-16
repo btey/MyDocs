@@ -3,7 +3,7 @@ slug: maya-hotkey-selection-highlighting
 title: Autodesk Maya - HotKey for Selection Highlighting
 author: Ben Tey
 author_url: https://github.com/btey
-author_image_url: 
+author_image_url: ../img/avatar/avataaars.png
 tags: [Autodesk, Maya, HotKey, Viewport, MEL]
 ---
 
