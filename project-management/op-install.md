@@ -1,6 +1,6 @@
 ---
 id: op-install
-title: OpenProject Installation
+title: OpenProject - Manual Installation
 slug: /openproject-install
 ---
 
@@ -229,14 +229,168 @@ will seed the database in the french language.
 
 ## 10. Serve OpenProject with Apache and Passenger
 
-[Docusaurus online chat](https://discord.gg/docusaurus)
+Exit the current bash session with the openproject user, so that we are again in a root shell.
 
-- [#docusaurus-2-dogfooding](https://discord.gg/7wjJ9yH) for user help
+```bash
+[openproject@ubuntu] exit
+```
 
-- [#docusaurus-2-dev](https://discord.gg/6g6ASPA) for contributing help
+Prepare Apache and Passenger:
 
-- [Reddit's Docusaurus community](https://www.reddit.com/r/docusaurus/)
+```bash
+[root@host] apt install -y apache2 libcurl4-gnutls-dev      \
+                           apache2-dev libapr1-dev \
+                           libaprutil1-dev
+[root@ubuntu] chmod o+x "/home/openproject"
+```
 
-## 11. Feature requests
+The Passenger gem is installed and integrated into Apache:
 
-For new feature requests, you can create a post on our, which is a handy tool for roadmapping and allows for sorting by upvotes, which gives the core team a better indicator of what features are in high demand, as compared to GitHub issues which are harder to triage. Refrain from making a Pull Request for new features (especially large ones) as someone might already be working on it or will be part of our roadmap. Talk to us first!
+```bash
+[root@ubuntu] su openproject --login
+[openproject@ubuntu] cd ~/openproject
+[openproject@ubuntu] gem install passenger
+[openproject@ubuntu] passenger-install-apache2-module
+```
+
+If you are running on a Virtual Private Server, you need to make sure you have atleast 1GB of RAM before running the `passenger-install-apache2-module`.
+
+Follow the instructions passenger provides. The passenger installer will ask you the question in “Which languages are you interested in?”. We are interested only in ruby.
+
+The passenger installer tells us to edit the Apache config files. To do this, continue as the root user:
+
+```bash
+[openproject@host] exit
+```
+
+Create the file `/etc/apache2/mods-available/passenger.load` and add the following line. But before copy & paste the following lines, check if the content (especially the version numbers!) is the same as the `passenger-install-apache2-module` installer said. When you’re in doubt, do what passenger tells you.
+
+```apacheconf
+LoadModule passenger_module /home/openproject/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/gems/passenger-6.0.6/buildout/apache2/mod_passenger.so
+```
+
+Create the file `/etc/apache2/mods-available/passenger.conf` with the following contents (again, take care of the version numbers!):
+
+```apacheconf
+<IfModule mod_passenger.c>
+  PassengerRoot /home/openproject/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/gems/passenger-6.0.6
+  PassengerDefaultRuby /home/openproject/.rbenv/versions/2.7.1/bin/ruby
+</IfModule>
+```
+
+Enable the new configuration:
+
+```bash
+[root@openproject] a2enmod passenger
+```
+
+As the root user, create the file `/etc/apache2/sites-available/openproject.conf` with the following contents:
+
+```apacheconf
+SetEnv EXECJS_RUNTIME Disabled
+
+<VirtualHost *:80>
+   ServerName yourdomain.com
+   # !!! Be sure to point DocumentRoot to 'public'!
+   DocumentRoot /home/openproject/openproject/public
+   <Directory /home/openproject/openproject/public>
+      # This relaxes Apache security settings.
+      AllowOverride all
+      # MultiViews must be turned off.
+      Options -MultiViews
+      # Uncomment this if you're on Apache >= 2.4:
+      Require all granted
+   </Directory>
+
+   # Request browser to cache assets
+   <Location /assets/>
+     ExpiresActive On ExpiresDefault "access plus 1 year"
+   </Location>
+
+</VirtualHost>
+```
+
+Enable the new openproject site (and disable the default site, if necessary):
+
+```bash
+[root@host] a2dissite 000-default
+[root@host] a2ensite openproject
+```
+
+Restart Apache:
+
+```bash
+[root@host] service apache2 restart
+```
+
+Your OpenProject installation should be accessible on port 80 (http). A default admin-account is created for you having the following credentials:
+
+Username: `admin` Password: `admin`
+
+Please, change the password on the first login. Also, we highly recommend to configure the SSL module in Apache for https communication.
+
+## 11. Activate background jobs
+
+OpenProject sends (some) mails asynchronously by using background jobs. All such jobs are collected in a queue, so that a separate process can work on them. This means that we have to start the background worker. To automate this we can create some scripts.
+
+### 11.1 Inbound email
+
+Create a shell script for **inbound** emails (e.g., `/home/openproject/scripts/inbound_emails.sh`):
+
+```bash
+#!/bin/bash
+source /home/openproject/.profile
+cd /home/openproject/openproject;
+RAILS_ENV="production" ./bin/rake redmine:email:receive_imap host='' username='' password='' port='993' ssl=true ssl_verification=false folder='INBOX' move_on_success='INBOX/op-read' move_on_failure='INBOX/op-error' project=[project-name] allow_override=project unknown_user=accept no_permission_check=1
+```
+
+### 11.2 Outbound emails
+
+Create another shell script for outbound emails (e.g., `/home/openproject/scripts/outbound_emails.sh`):
+
+```shell
+#!/bin/bash
+source /home/openproject/.profile
+cd /home/openproject/openproject;
+RAILS_ENV="production" ./bin/rake jobs:workoff
+```
+
+### 11.3 Add scripts to crontab
+
+Put scripts for the background worker into a cronjob:
+
+```bash
+[root@all] su - openproject -c "bash -l"
+[openproject@all] crontab -e
+```
+
+Add the following entries:
+
+```bash
+*/1 * * * * /home/openproject/scripts/inbound_emails.sh >/dev/null 2>&1
+*/1 * * * * /home/openproject/scripts/outbound_emails.sh >/dev/null 2>&1
+```
+
+This will start the worker job every minute.
+
+## 12. Troubleshooting
+
+You can find the error logs for apache here:
+
+```bash
+/var/log/apache2/error.log
+```
+
+The OpenProject logfile can be found here:
+
+```bash
+/home/openproject/openproject/log/production.log
+```
+
+If an error occurs, it should be logged there.
+
+If you need to restart the server (for example after a configuration change), do:
+
+```bash
+[openproject@all] touch ~/openproject/tmp/restart.txt
+```
