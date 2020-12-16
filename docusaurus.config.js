@@ -86,7 +86,7 @@ module.exports = {
           position: 'left',
           activeBaseRegex: `/project-management/`,
         },
-        //{to: 'blog', label: 'Blog', position: 'left'},
+        {to: 'blog', label: 'Blog', position: 'left'},
         //{to: 'second-blog', label: 'Blog 2', position: 'left'},
         {
           href: 'https://github.com/btey',
