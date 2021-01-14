@@ -6,7 +6,7 @@ slug: /openproject-install
 
 :::note
 
-The following instructions is for the version **11.1.0** of OpenProject. The sources mentioned in this guide are available [here](https://github.com/btey/openproject).
+The following instructions is for the version **11.1.1** of OpenProject. The sources mentioned in this guide are available [here](https://github.com/btey/openproject).
 
 :::
 
