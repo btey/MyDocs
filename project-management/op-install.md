@@ -6,7 +6,7 @@ slug: /openproject-install
 
 :::note
 
-The following instructions is for the version **11.1.1** of OpenProject. The sources mentioned in this guide are available [here](https://github.com/btey/openproject).
+The following instructions is for the version **11.1.3** of OpenProject. The sources mentioned in this guide are available [here](https://github.com/btey/openproject).
 
 :::
 
@@ -91,15 +91,15 @@ The are several possibilities to install Ruby. In this guide we'll use [rbenv](h
 [openproject@host] source ~/.profile
 [openproject@host] git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 
-[openproject@host] rbenv install 2.7.1
+[openproject@host] rbenv install 2.7.2
 [openproject@host] rbenv rehash
-[openproject@host] rbenv global 2.7.1
+[openproject@host] rbenv global 2.7.2
 ```
 
 To check our Ruby installation we run `ruby --version`. It should output something very similar to:
 
 ```bash
-ruby 2.7.1pXYZ (....) [x86_64-linux]
+ruby 2.7.2pXYZ (....) [x86_64-linux]
 ```
 
 ## 6. Installation of Node
@@ -266,15 +266,15 @@ The passenger installer tells us to edit the Apache config files. To do this, co
 Create the file `/etc/apache2/mods-available/passenger.load` and add the following line. But before copy & paste the following lines, check if the content (especially the version numbers!) is the same as the `passenger-install-apache2-module` installer said. When you’re in doubt, do what passenger tells you.
 
 ```apacheconf
-LoadModule passenger_module /home/openproject/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/gems/passenger-6.0.7/buildout/apache2/mod_passenger.so
+LoadModule passenger_module /home/openproject/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/passenger-6.0.7/buildout/apache2/mod_passenger.so
 ```
 
 Create the file `/etc/apache2/mods-available/passenger.conf` with the following contents (again, take care of the version numbers!):
 
 ```apacheconf
 <IfModule mod_passenger.c>
-  PassengerRoot /home/openproject/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/gems/passenger-6.0.7
-  PassengerDefaultRuby /home/openproject/.rbenv/versions/2.7.1/bin/ruby
+  PassengerRoot /home/openproject/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/passenger-6.0.7
+  PassengerDefaultRuby /home/openproject/.rbenv/versions/2.7.2/bin/ruby
 </IfModule>
 ```
 
